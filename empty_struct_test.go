@@ -9,7 +9,7 @@ import (
 func Test_tolerateEmptyStructDecoder_Decode(t *testing.T) {
 	var json = jsoniter.ConfigCompatibleWithStandardLibrary
 	//  treat {} as empty array
-	jsoniter.RegisterExtension(&tolerateEmptyStructExtension{})
+	jsoniter.RegisterExtension(&TolerateEmptyStructExtension{})
 	var testList TestList
 	var err error
 	err = json.Unmarshal([]byte(`{"list":[]}`), &testList)

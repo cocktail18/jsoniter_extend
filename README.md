@@ -7,6 +7,6 @@ An extention for `github.com/json-iterator/go`
 ```go
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 //  treat {} as empty array
-jsoniter.RegisterExtension(&tolerateEmptyStructExtension{})
+jsoniter.RegisterExtension(&TolerateEmptyStructExtension{})
 json.Marshal(&data)
 ```

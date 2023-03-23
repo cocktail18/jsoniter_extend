@@ -7,22 +7,22 @@ import (
 	"unsafe"
 )
 
-type tolerateEmptyStructExtension struct {
+type TolerateEmptyStructExtension struct {
 	jsoniter.DummyExtension
 }
 
-func (extension *tolerateEmptyStructExtension) DecorateDecoder(typ reflect2.Type, decoder jsoniter.ValDecoder) jsoniter.ValDecoder {
+func (extension *TolerateEmptyStructExtension) DecorateDecoder(typ reflect2.Type, decoder jsoniter.ValDecoder) jsoniter.ValDecoder {
 	if typ.Kind() == reflect.Slice || typ.Kind() == reflect.Array {
-		return &tolerateEmptyStructDecoder{decoder}
+		return &TolerateEmptyStructDecoder{decoder}
 	}
 	return decoder
 }
 
-type tolerateEmptyStructDecoder struct {
+type TolerateEmptyStructDecoder struct {
 	valDecoder jsoniter.ValDecoder
 }
 
-func (decoder *tolerateEmptyStructDecoder) Decode(ptr unsafe.Pointer, iter *jsoniter.Iterator) {
+func (decoder *TolerateEmptyStructDecoder) Decode(ptr unsafe.Pointer, iter *jsoniter.Iterator) {
 	if iter.WhatIsNext() == jsoniter.ObjectValue {
 		iter.Skip()
 		newIter := iter.Pool().BorrowIterator([]byte("[]"))
